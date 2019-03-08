@@ -15,6 +15,7 @@ def myAtoi(str):
             continue # 开头为空
         else:
             if flag == 0 and i == 0 and ban == 0and (each <'0'or each >'9'):
+            if flag == 0 and i == 0 and ban == 0 and (each <'0'or each >'9'):
                 if each == '+': flag = 1
                 elif each == '-': flag = -1
                 else: return 0  # 第一个非空字符
