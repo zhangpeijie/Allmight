@@ -1,3 +1,5 @@
+111111111111111111111111111111111
+aaaaaabbbb
 def myAtoi(str):
     """
     :type str: str
