@@ -28,6 +28,7 @@
 <div align=center><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/%E5%9B%BE%E7%89%872.png?raw=true"></div>
 	架构图：
 <div align="center"><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/%E5%9B%BE%E7%89%871.png?raw=true"></div>
+
 ### 功能需求
 	1. 实现摄像头拍摄并定位车牌  
 	2. 实现对图片内容的识别，生成车牌号码  
