@@ -6,13 +6,14 @@
 	Host：Ubuntu  
 	Target：Raspbain（待定）  
 
-	| 系统名称 | 特点 |  
-	| ---- | ---- |
-	|Raspbian|基于Debian，带图形界面，兼容性好和性能优秀|  
-	|Raspbian Lite|基于Debian，不带图形界面，兼容性好和性能优秀，安装包更小|  
-	|Ubuntu Mate|界面个性美观|  
-	|Snappy Core|Ubuntu针对IoT的一个发行版本|  
-	|Win10 IoT Core|微软官方针对IoT的一个windows版本|  
+| 系统名称 | 特点 |  
+| ---- | ---- |
+|Raspbian|基于Debian，带图形界面，兼容性好和性能优秀|  
+|Raspbian Lite|基于Debian，不带图形界面，兼容性好和性能优秀，安装包更小|  
+|Ubuntu Mate|界面个性美观|  
+|Snappy Core|Ubuntu针对IoT的一个发行版本|  
+|Win10 IoT Core|微软官方针对IoT的一个windows版本|  
+
 	依赖库：python官方和第三方库；OpenCV
 	中间件：MQTT协议
 ### 编程环境
@@ -23,7 +24,8 @@
 ### 项目名称
 	基于树莓派的车牌识别系统
 ### 项目结构
-
+	![关联图](https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/%E5%9B%BE%E7%89%872.png~)
+	![结构图](https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/%E5%9B%BE%E7%89%871.png)
 ### 功能需求
 	1. 实现摄像头拍摄并定位车牌  
 	2. 实现对图片内容的识别，生成车牌号码  
