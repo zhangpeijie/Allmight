@@ -23,11 +23,9 @@
 ## 需求分析
 ### 项目名称
 	基于树莓派的车牌识别系统
-### 项目结构
-	关联图：
-<div align=center><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/%E5%9B%BE%E7%89%872.png?raw=true"></div>
-	架构图：
-<div align="center"><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/%E5%9B%BE%E7%89%871.png?raw=true"></div>
+### 项目结构 
+<div align=center><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/%E5%9B%BE%E7%89%872.png?raw=true"/><br>关联图</div>
+<div align=center><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/%E5%9B%BE%E7%89%871.png?raw=true" height=80% weight=80%/><br>结构图</div>
 
 ### 功能需求
 	1. 实现摄像头拍摄并定位车牌  
