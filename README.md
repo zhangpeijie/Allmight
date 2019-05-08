@@ -40,3 +40,4 @@
 		编程环境：python、gcc、g++  
 		依赖库：opencv、MQTT、Qt  
 		集成开发环境：vim、pycharm、emacs
+#构建目标系统
