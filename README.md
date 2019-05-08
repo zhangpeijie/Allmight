@@ -81,9 +81,9 @@
 ### 根据默认配置裁剪内核
     进入menuconfig配置内核：sudo make ARCH=arm CROSS_COMPILE=~/kernel/tools/arm-bcm2708/    gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf- menuconfig  
     配置选项  
-    General setup  
-| 配置 | 原因 |  
-| ---- | ---- |  
+|General setup||  
+| ---- | ---- |
+| 配置 | 原因 |
 | Support for paging of anonymous memory (swap)（Y=>N）| 使用交换分区或者交换文件来做为虚拟内存，系统不需要虚拟内存 |
 | BSD Process Accounting（Y=>N）| BSD进程记账支持，用户空间程序可以要求内核将进程的统计信息写入一个指定的文件，主要包括进程的创建时间/创建者/内存占用等信息，不必要的功能|
 | Export task/process statistics through netlink（Y=>N）| 通过netlink接口向用户空间导出进程的统计信息，不必要的功能 |
