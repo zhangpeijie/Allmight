@@ -79,9 +79,9 @@
     将SD卡插入树莓派开机，可以正常启动，Linux内核版本由Linux raspberrypi 4.14.79-v7+更新为Linux raspberrypi 4.19.37-v7+；查阅资料得知可能会存在无法启动的问题，原因是boot引导文件与内核版本不匹配，解决方式为将https://github.com/raspberrypi/firmware中的bootcode.bin，fixup.dat，start.elf三个文件拷贝到boot文件夹中替换原文件即可。
 
 ### 根据默认配置裁剪内核
-  进入menuconfig配置内核：sudo make ARCH=arm CROSS_COMPILE=~/kernel/tools/arm-bcm2708/    gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf- menuconfig  
-  配置选项  
-  General setup    
+    进入menuconfig配置内核：sudo make ARCH=arm CROSS_COMPILE=~/kernel/tools/arm-bcm2708/    gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf- menuconfig  
+    配置选项  
+    General setup  
 | 配置 | 原因 |  
 | ---- | ---- |  
 | Support for paging of anonymous memory (swap)（Y=>N）| 使用交换分区或者交换文件来做为虚拟内存，系统不需要虚拟内存 |
@@ -94,12 +94,12 @@
 |Support initial ramdisks compressed using LZO（Y=>N）| 选择一种压缩方式，支持经过gzip压缩的ramdisk或cpio镜像 |
 |Support initial ramdisk/ramfs compressed using LZ4（Y=>N）| 选择一种压缩方式，支持经过gzip压缩的ramdisk或cpio镜像 |
 |BUG() support（Y=>N）| 显示故障和失败条件(BUG和WARN)，嵌入式设备一般不需要 |
-|Enable ELF core dumps（Y=>N）|内存转储支持，可以帮助调试ELF格式的程序，用于调试和开发用户态程序，不必要的功能
-|Enable VM event counters for /proc/vmstat（Y=>N）|显示较详细的信息(包含各种事件计数器)主要用于调试和统计，不必要的功能
-|Choose SLAB allocator (SLOB (Simple Allocator))|SLOB针对小型系统设计，做了非常激进的简化，以适用于内存非常有限(小于64M)的嵌入式环境
-|Profiling support（Y=>N）|支持对内核进行分析，内核体积将会显著增大，并且运行速度显著减慢|Enable loadable module support
-|Module versioning support（Y=>N）|允许使用为其他内核版本编译的模块，可会造成系统崩溃
-|Source checksum for all modules（Y=>N）|为模块添加"srcversion"字段，以帮助模块维护者准确的知道编译此模块所需要的源文件，从而可以校验源文件的变动，仅内核模块开发者需要它
+|Enable ELF core dumps（Y=>N）|内存转储支持，可以帮助调试ELF格式的程序，用于调试和开发用户态程序，不必要的功能|
+|Enable VM event counters for /proc/vmstat（Y=>N）|显示较详细的信息(包含各种事件计数器)主要用于调试和统计，不必要的功能|
+|Choose SLAB allocator (SLOB (Simple Allocator))|SLOB针对小型系统设计，做了非常激进的简化，以适用于内存非常有限(小于64M)的嵌入式环境|
+|Profiling support（Y=>N）|支持对内核进行分析，内核体积将会显著增大，并且运行速度显著减慢|Enable loadable module support|
+|Module versioning support（Y=>N）|允许使用为其他内核版本编译的模块，可会造成系统崩溃|
+|Source checksum for all modules（Y=>N）|为模块添加"srcversion"字段，以帮助模块维护者准确的知道编译此模块所需要的源文件，从而可以校验源文件的变动，仅内核模块开发者需要它|
 |Enable the block layer||
 |Macintosh partition map support（Y=>N）|苹果的Macintosh平台使用的分区格式，目标是树莓派|
 |Block layer debugging information in debugfs（Y=>N）|调试信息，不必要的功能|
