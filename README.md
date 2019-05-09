@@ -80,10 +80,10 @@
 
 ### 根据默认配置裁剪内核
     进入menuconfig配置内核：sudo make ARCH=arm CROSS_COMPILE=~/kernel/tools/arm-bcm2708/    gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf- menuconfig  
-    配置选项  
-|General setup||  
+    配置选项    
 | ---- | ---- |
 | 配置 | 原因 |
+|General setup||
 | Support for paging of anonymous memory (swap)（Y=>N）| 使用交换分区或者交换文件来做为虚拟内存，系统不需要虚拟内存 |
 | BSD Process Accounting（Y=>N）| BSD进程记账支持，用户空间程序可以要求内核将进程的统计信息写入一个指定的文件，主要包括进程的创建时间/创建者/内存占用等信息，不必要的功能|
 | Export task/process statistics through netlink（Y=>N）| 通过netlink接口向用户空间导出进程的统计信息，不必要的功能 |
@@ -98,6 +98,7 @@
 |Enable VM event counters for /proc/vmstat（Y=>N）|显示较详细的信息(包含各种事件计数器)主要用于调试和统计，不必要的功能|
 |Choose SLAB allocator (SLOB (Simple Allocator))|SLOB针对小型系统设计，做了非常激进的简化，以适用于内存非常有限(小于64M)的嵌入式环境|
 |Profiling support（Y=>N）|支持对内核进行分析，内核体积将会显著增大，并且运行速度显著减慢|Enable loadable module support|
+|Enable loadable module support||
 |Module versioning support（Y=>N）|允许使用为其他内核版本编译的模块，可会造成系统崩溃|
 |Source checksum for all modules（Y=>N）|为模块添加"srcversion"字段，以帮助模块维护者准确的知道编译此模块所需要的源文件，从而可以校验源文件的变动，仅内核模块开发者需要它|
 |Enable the block layer||
