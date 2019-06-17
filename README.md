@@ -1,8 +1,8 @@
 # AllMight
-## 开发环境
-### 硬件环境
-	树莓派3B
-### 软件环境
+## 1. 开发环境
+### 1.1 硬件环境
+	树莓派3B 
+### 1.2 软件环境
 	Host：Ubuntu  
 	Target：Raspbain（待定）  
 
@@ -16,22 +16,22 @@
 
 	依赖库：python官方和第三方库；OpenCV
 	中间件：MQTT协议
-### 编程环境
+### 1.3 编程环境
 	文本编辑器：vi/vim  
 	交叉编译工具：gcc-linaro-arm-linux-gnueabihf-raspbian-x64  
 	交叉调试工具：gdb/gdbserver
-## 需求分析
-### 项目名称
+## 2. 需求分析
+### 2.1 项目名称
 	基于树莓派的车牌识别系统
-### 项目结构 
+### 2.2 项目结构 
 <div align=center><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/%E5%9B%BE%E7%89%872.png?raw=true"/><br>关联图</div>
 <div align=center><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/%E5%9B%BE%E7%89%871.png?raw=true" height=80% weight=80%/><br>结构图</div>
 
-### 功能需求
+### 2.3 功能需求
 	1. 实现摄像头拍摄并定位车牌  
 	2. 实现对图片内容的识别，生成车牌号码  
 	3. 实现车牌号码的展示
-### 软硬件要求
+### 2.4 软硬件要求
 	硬件需求：  
 		摄像头：playstation3 eyestation  
 		开发板：树莓派3B  
@@ -40,8 +40,8 @@
 		编程环境：python、gcc、g++  
 		依赖库：opencv、MQTT、Qt  
 		集成开发环境：vim、pycharm、emacs
-## 构建目标系统
-### 默认配置编译内核（使用交叉编译）
+## 3. 构建目标系统
+### 3.1 默认配置编译内核（使用交叉编译）
     安装必要依赖：sudo apt-get install git bc bison flex libssl-dev
     克隆Linux内核源码：git clone --depth=1 https://github.com/raspberrypi/linux
     克隆交叉编译工具：git clone https://github.com/raspberrypi/tools ~/tools
@@ -78,7 +78,7 @@
 
     将SD卡插入树莓派开机，可以正常启动，Linux内核版本由Linux raspberrypi 4.14.79-v7+更新为Linux raspberrypi 4.19.37-v7+；查阅资料得知可能会存在无法启动的问题，原因是boot引导文件与内核版本不匹配，解决方式为将https://github.com/raspberrypi/firmware中的bootcode.bin，fixup.dat，start.elf三个文件拷贝到boot文件夹中替换原文件即可。
 
-### 根据默认配置裁剪内核
+### 3.2 根据默认配置裁剪内核
     进入menuconfig配置内核：sudo make ARCH=arm CROSS_COMPILE=~/kernel/tools/arm-bcm2708/    gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf- menuconfig  
     配置选项    
 | 配置 | 原因 |
@@ -137,7 +137,7 @@
 |Networking support（Y=>N）|网络支持，系统本地处理，不需要网络功能，不编译进内核|
     按照上述默认配置编译内核的方法将裁剪后的内核编译安装到树莓派，可以正常运行，
     裁剪前Linux内核大小为5.2M，裁剪后内核大小减小为3.1M
-### 加载与卸载至少一个模块程序
+### 3.3 加载与卸载至少一个模块程序
     首先用lsmod命令查看已经安装好的模块，得到如下结果：
 <div align=center><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/hw3_1.png?raw=true"/><br></div>
     然后用 lsmod | grep "media"命令进一步查看media模块的信息：
@@ -154,7 +154,7 @@
     可以观察到，这个module已经加载成功。
     这样，就成功加载与卸载了i2c-dev这个模块程序。  
 
-### 创建用于应用开发的文件系统
+### 3.4 创建用于应用开发的文件系统
     对于创建文件系统，思路是首先要对某个ram磁盘进行分区，然后进行文件系统的创建，最后将磁盘挂载到操作系统上的某个目录。
     首先进行磁盘分区，首先进入root获得更大权限以查看磁盘情况，如图所示：
 <div align=center><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/hm3_7.png?raw=true"/><br></div>
@@ -168,4 +168,82 @@
 <div align=center><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/hw3_11.png?raw=true"/><br></div>
     而后需要挂载文件系统，输入:mount /dev/ram14    /mnt(把ram14分区挂载到mnt上)，并利用mount查看结果：
 <div align=center><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/hw3_12.png?raw=true"/><br></div>
-    如红框显示，已经将文件系统创建并挂载
+    如红框显示，已经将文件系统创建并挂载  
+
+## 4. 项目汇报  
+### 4.1 整体  
+1. 整体架构：硬件：树莓派，摄像头；软件：opencv
+2. 系统架构：通过摄像头采集连续图像信息，使用opencv提取某一帧，在这一帧的基础上，运行模式识别算法，提取车牌信息并显示  
+3. 车牌识别算法设计：车牌识别算法设计，主要分为四部分：图像预处理、车牌定位、字符分割、字符识别。  
+<div align=center><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/hw4_1.jpg?raw=true"/><br>算法流程图</div>  
+
+### 4.2 车牌识别算法  
+#### 4.2.1 图像预处理
+      通过opencv驱动摄像头，连续拍照，手动触发，提取窗口中显示的彩色图像。完整的三通道的彩色图像对于后续处理来说，数据过度冗余，降低了处理速度，所以图像预处理主要包含图像灰度化和二值化、图像压缩。  
+      图像灰度化是将三通道的彩色图像，转化为8bit的RGB图像转化为8bit的灰度图。图像灰度化的方法有：分量法、最大值法、平均值法、加权法。在我们的方案设计中，采用了加权法：  
+$$
+Gray = R*0.299 + G*0.587 + B*0.114
+$$  
+      对每个像素点，其像素值为三通道像素值的加权平均值。为了进一步加速上式：  
+$$
+Gray = (R*76 + G*150 + B*30) >> 8
+$$  
+      对于灰度图，其分辨率仍然超出识别的精度要求，因此采用抽值法进行采用，以进一步压缩数据量。对灰度图，每两行、两列抽取一个像素点作为压缩后像素点的值。  
+      对压缩后的图像，则采用大津法二值化以进一步压缩数据和方便后续识别算法的处理。大津法通过将图像的前景、后景分离，前景即为待识别的车牌。
+      大津法算法步骤如下:
+      1)  先计算图像的直方图，即将图像所有的像素点按照0~255共256个bin，统计落在每个bin的像素点数量
+      2)  归一化直方图，也即将每个bin中像素点数量除以总的像素点
+      3)  i表示分类的阈值，也即一个灰度级，从0开始迭代
+      4)  通过归一化的直方图，统计0~i 灰度级的像素(假设像素值在此范围的像素叫做前景像素) 所占整幅图像的比例w0，并统计前景像素的平均灰度u0；统计i~255灰度级的像素(假设像素值在此范围的像素叫做背景像素) 所占整幅图像的比例w1，并统计背景像素的平均灰度u1；
+      5)  计算前景像素和背景像素的方差 
+$$g = w0*w1*(u0-u1) (u0-u1)$$
+      6)  i++；转到4)，直到i为256时结束迭代
+      7）将最大g相应的i值作为图像的全局阈值
+<div align=center><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/hw4_2.jpg?raw=true"/><br>原始输入图像</div>
+<div align=center><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/hw4_3.jpg?raw=true"/><br>预处理图像</div>
+
+#### 4.2.2 车牌定位
+      二值化的车牌图像，由于车牌周围的空白区域的干扰、车牌位置的漂移、拍照时的畸变等因素，仍不能直接用于识别，故此步骤，主要实现车牌的定位和倾斜校正。  
+      车牌的定位采用sobel算子提取车牌边缘。Sobel算子的计算过程如下:  
+      对图像上每一点gray分别在x、y方向上求导。  
+      水平方向上将图像与大小为3*3的矩阵进行卷积：
+$$Gx=
+\left[
+ \begin{matrix}
+   -1 & 0 & 1 \\
+   -2 & 0 & 2 \\
+   -1 & 0 & 1 
+  \end{matrix} 
+\right]
+*gray
+$$ 
+      垂直方向上将图像与大小为3*3的矩阵进行卷积：  
+$$Gx=
+\left[
+ \begin{matrix}
+   -1 & -2 & -1 \\
+    0 & 0 & 0 \\
+   -1 & -2 & -1 
+  \end{matrix} 
+\right]
+*gray
+$$   
+      在图像的每一点，结合以上两个结果求出近似梯度：  
+$$G=
+\sqrt{Gx^2+Gy^2}
+$$ 
+      通过sobel算子，提取出车牌边缘，进而采用投影法提取出车牌。  
+      对提取出的车牌进一步采用hough变换进行倾斜纠正。它是先把直角坐标系的目标点映射到极坐标系上进行累积 ,即它是先使直角坐标系平面上任一直线上的所有点均累积到极坐标系的同一点集中去 ,然后通过寻找极坐标系中点集的峰值 ,来发现长的直线特征 .由于这种点集是通过累积统计得到的 ,因而能够容忍直线的间断 。  
+<div align=center><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/hw4_4.jpg?raw=true"/><br>定位后车牌的图像</div>
+
+#### 4.2.3 字符分割
+    对于定位后的头像，对每一列投影，记录每列白色像素点的个数，由于车牌字符间没有粘连，则投影中0值即为一个字符的起始点。
+<div align=center><img src="https://github.com/zhangpeijie/Allmight/blob/master/README.md%20picture/hw4_5.PNG?raw=true"/><br>字符分割结果</div>
+
+#### 4.2.4 字符识别
+      在字符识别中，首先构建基准的参考模型，通过比较每个字符与模型的相似度，判断该字符的值。字符与模型间的相似度则采用皮尔逊相关系数来计算。在统计学中，皮尔逊相关系数相关系数（英语：Pearson product-moment correlation coefficient，又称作 PPMCC或PCCs, 用r表示）用于度量两个变量X和Y之间的相关（线性相关），其值介于-1与1之间。通常情况下通过以下相关系数取值范围判断变量的相关强度：  
+$$
+\rho=\frac{cov(x,y)}{\sigma_x\sigma_y}=\frac{E[(X-\mu x)(Y-\mu y)]}{\sigma_x\sigma_y}
+$$ 
+      协方差是一个反映两个随机变量相关程度的指标，如果一个变量跟随着另一个变量同时变大或者变小，那么这两个变量的协方差就是正值，反之相反。虽然协方差能反映两个随机变量的相关程度（协方差大于0的时候表示两者正相关，小于0的时候表示两者负相关），但是协方差值的大小并不能很好地度量两个随机变量的关联程度，其值大小与两个变量的量纲有关，不适于比较。为了更好的度量两个随机变量的相关程度， Pearson相关系数其在协方差的基础上除以了两个随机变量的标准差。相关系数ρ相当于协方差的“标准化”，消除了量纲的影响。  
+      对每个分割出的字符，同0-9十个参考模型做对比，计算同每个模型的皮尔逊相似度，提取最大的相似度对应参考模型作为该字符的值，最后返回最后结果。  
